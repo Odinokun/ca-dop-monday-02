@@ -30,13 +30,22 @@ export function Todolist(props: PropsType) {
   };
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     setError(null);
-    if (e.charCode === 13) {
-      // addTask();
+    if (e.code === 'Enter') {
+      addTaskHandler();
     }
   };
 
   const removeTodolistHandler = () => {
     props.removeTodolist(props.id);
+  };
+  const addTaskHandler = () => {
+    props.addTask(title, props.id);
+  };
+  const removeTaskHandler = (taskId: string) => {
+    props.removeTask(taskId, props.id);
+  };
+  const changeFilterHandler = (value: FilterValuesType) => {
+    props.changeFilter(value, props.id);
   };
 
   return (
@@ -52,7 +61,7 @@ export function Todolist(props: PropsType) {
           onKeyDown={onKeyPressHandler}
           className={error ? 'error' : ''}
         />
-        <Button name='+' callback={() => props.addTask(title, props.id)} />
+        <Button name='+' callback={addTaskHandler} />
         {error && <div className='error-message'>{error}</div>}
       </div>
       <ul>
@@ -70,35 +79,29 @@ export function Todolist(props: PropsType) {
                 checked={t.isDone}
               />
               <span>{t.title}</span>
-              <Button
-                name='x'
-                callback={() => props.removeTask(t.taskId, props.id)}
-              />
+              <Button name='x' callback={() => removeTaskHandler(t.taskId)} />
             </li>
           );
         })}
       </ul>
       <div>
-        <button
+        <Button
+          name='All'
+          callback={() => changeFilterHandler('all')}
           className={props.filter === 'all' ? 'active-filter' : ''}
-          onClick={() => {}}
-        >
-          All
-        </button>
-        <button
+        />
+        <Button
+          name='Active'
+          callback={() => changeFilterHandler('active')}
           className={props.filter === 'active' ? 'active-filter' : ''}
-          onClick={() => {}}
-        >
-          Active
-        </button>
-        <button
+        />
+        <Button
+          name='Completed'
+          callback={() => changeFilterHandler('completed')}
           className={props.filter === 'completed' ? 'active-filter' : ''}
-          onClick={() => {}}
-        >
-          Completed
-        </button>
+        />
       </div>
-      <p></p>
+      <br />
       {props.students.map(el => {
         return <div>{el}</div>;
       })}

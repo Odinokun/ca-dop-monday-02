@@ -3,12 +3,17 @@ import { FC } from 'react';
 type PropsType = {
   name: string;
   callback: () => void;
+  className?: string;
 };
 
-export const Button: FC<PropsType> = ({ name, callback }) => {
+export const Button: FC<PropsType> = ({ name, callback, className }) => {
   const onClickHandler = () => {
     callback();
   };
 
-  return <button onClick={onClickHandler}>{name}</button>;
+  return (
+    <button className={className} onClick={onClickHandler}>
+      {name}
+    </button>
+  );
 };
