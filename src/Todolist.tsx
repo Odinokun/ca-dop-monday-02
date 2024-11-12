@@ -35,11 +35,15 @@ export function Todolist(props: PropsType) {
     }
   };
 
+  const removeTodolistHandler = () => {
+    props.removeTodolist(props.id);
+  };
+
   return (
     <div>
       <h3>
         {props.title}
-        <Button name='x' callback={() => props.removeTodolist(props.id)} />
+        <Button name='x' callback={removeTodolistHandler} />
       </h3>
       <div>
         <input
