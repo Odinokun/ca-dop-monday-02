@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './App.css';
-import { Todolist } from './Todolist';
 import { v1 } from 'uuid';
+import { Todolist } from './Todolist';
+import './App.css';
 
 type ObjectType = {
   title: string;
