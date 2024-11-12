@@ -68,9 +68,7 @@ export function Todolist(props: PropsType) {
               <span>{t.title}</span>
               <Button
                 name='x'
-                callback={() => {
-                  'removeTask';
-                }}
+                callback={() => props.removeTask(t.taskId, props.id)}
               />
             </li>
           );
