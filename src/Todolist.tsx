@@ -45,15 +45,10 @@ export function Todolist(props: PropsType) {
         <input
           value={title}
           onChange={onChangeHandler}
-          onKeyPress={onKeyPressHandler}
+          onKeyDown={onKeyPressHandler}
           className={error ? 'error' : ''}
         />
-        <Button
-          name='+'
-          callback={() => {
-            'addTask';
-          }}
-        />
+        <Button name='+' callback={() => props.addTask(title, props.id)} />
         {error && <div className='error-message'>{error}</div>}
       </div>
       <ul>
